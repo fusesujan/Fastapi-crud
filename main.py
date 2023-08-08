@@ -75,7 +75,7 @@ def update_employee(emp_id: str, field: str, new_value: str, db: Session = Depen
     employee_query = db.query(ModelEmployee).filter(
         ModelEmployee.id == emp_id)
     emp_db = employee_query.first()
-    print(emp_db, "<=============================================== Employee")
+    # print(emp_db, "<=============================================== Employee")
     if not emp_db:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"Coultnot get the employee with employee id{emp_id}")
@@ -103,7 +103,7 @@ def delete_employee(emp_id: str, db: Session = Depends(get_db)):
     emp_db = employee_query.first()
     if not emp_db:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail=f"Employee with {emp_id} not found")
+                            detail=f"Coultnot get the employee with employee id{emp_id}")
 
     employee_query.delete(synchronize_session=False)
     db.commit()
