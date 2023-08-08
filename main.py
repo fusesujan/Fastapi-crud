@@ -9,6 +9,9 @@ app = FastAPI()
 @app.on_event("startup")
 # create table
 def create_table():
+    """
+    create table at start
+    """
     Base.metadata.create_all(bind=engine)
 
 
@@ -45,7 +48,7 @@ def create_employees(name: str, department: str, db: Session = Depends(get_db)):
 
 @app.get("/employees/{emp_id}")
 # return table based on employee id
-def get_employees(emp_id: str, db: Session = Depends(get_db)):
+def get_employee(emp_id: str, db: Session = Depends(get_db)):
     """
     Retrieve employee details based on employee ID.
 
