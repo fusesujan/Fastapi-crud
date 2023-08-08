@@ -85,7 +85,7 @@ def update_employee(emp_id: str, field: str, new_value: str, db: Session = Depen
     db.commit()
     db.refresh(emp_db)
 
-    return {"status": "success", "employee": emp_db}
+    return {"status": "Employe detail updated successfully", "employee": emp_db}
 
 
 @app.delete("/employees/{emp_id}")
