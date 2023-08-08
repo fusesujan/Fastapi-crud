@@ -62,14 +62,14 @@ def get_employees(emp_id: str, db: Session = Depends(get_db)):
     return {"status_code": status.HTTP_200_OK, "employee": employee}
 
 
-@app.put("/employees/{emp_id}/{column}/{new_value}")
-# update the table using employeeid and set new value of a column
-def update_employee(emp_id: str, column: str, new_value: str, db: Session = Depends(get_db)):
+@app.put("/employees/{emp_id}/{field}/{new_value}")
+# update the table using employeeid and set new value of a field
+def update_employee(emp_id: str, field: str, new_value: str, db: Session = Depends(get_db)):
     """
-    Update a specific column of an employee based on employee ID.
+    Update a specific field of an employee based on employee ID.
 
-    This endpoint updates a specified column of an employee record in the 'employee' table
-    based on the provided employee ID. The specified column is updated with the new value.
+    This endpoint updates a specified field of an employee record in the 'employee' table
+    based on the provided employee ID. The specified field is updated with the new value.
 
     """
     employee_query = db.query(ModelEmployee).filter(
@@ -80,7 +80,7 @@ def update_employee(emp_id: str, column: str, new_value: str, db: Session = Depe
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"Coultnot get the employee with employee id{emp_id}")
 
-    setattr(emp_db, column, new_value)
+    setattr(emp_db, field, new_value)
     db.add(emp_db)
     db.commit()
     db.refresh(emp_db)
